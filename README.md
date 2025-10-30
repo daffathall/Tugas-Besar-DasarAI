@@ -3,7 +3,7 @@
 
 Pemecah Bin Packing Problem menggunakan beberapa algoritma local search:
 
--   Berbagai varian Hill Climbing (steepest ascent, stochastic, first-choice, sideways move, random restart)
+-   Berbagai varian Hill Climbing (steepest ascent, stochastic, sideways move, random restart)
 
 -   Simulated Annealing
 
@@ -67,3 +67,27 @@ python src/main.py
 # macOS/Linux
 python3 src/main.py
 ```
+
+---
+
+
+## Pembagian Tugas
+-   Fawwaz Aydin Mustofa 18222109: 
+    Membuat README.md 
+    Melakukan testing dan running code
+    Mengisi laporan bagian pembahasan
+    Mengisi laporan bagian kesimpulan dan saran
+    
+-   Daffa Athalla Rajasa 18223053: 
+    Membuat representasi state dengan file bin_packing.py
+    Mengimplementasikan seluruh varian Hill Climbing: steepest ascent, stochastic, sideways, dan random restart dengan file hill_climbing.py
+    Menangani I/O data (load JSON, save hasil) dan utilitas pendukung (timer, logger) dengan file utils.py
+    Menyusun script untuk menjalankan seluruh algoritma secara terpusat dengan main.py
+    Membuat cover dan kerangka laporan
+    
+-   Adam Joaquin Girsang 18223089:
+    Merancang fungsi objektif dan fitness untuk mengukur kualitas solusi dengan objective_function.py
+    Mengembangkan algoritma Simulated Annealing (cooling schedule, acceptance probability) dengan simulated_annealing.py
+    Mengimplementasikan Genetic Algorithm dengan seleksi turnamen, crossover OX, mutasi move/swap, serta repair function dengan genetic_algorithm.py
+    Mengembangkan fungsi visualisasi konvergensi, probabilitas SA, perbandingan GA, dan isi kontainer dengan visualizer.py
+    Membuat laporan bagian desain persoalan
