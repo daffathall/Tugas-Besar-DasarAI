@@ -16,18 +16,20 @@ Kode ditulis dalam Python dan menghasilkan ringkasan performa di terminal serta 
 ## Struktur Repository
 ```
 Tugas-Besar-DasarAI/
-├─ data/
-│  └─ input.json              # Dataset contoh (kapasitas kontainer & daftar barang)
-├─ results/                   # Hasil visualisasi & eksperimen (akan dibuat otomatis)
+data/
+│  └─ input.json                                            # Dataset contoh (kapasitas kontainer & daftar barang)
+├─ doc/
+│  └─ Laporan Tugas 1 IF3070_Kelompok 43.pdf                # Laporan Tugas
+├─ results/                                                 # Hasil visualisasi & eksperimen (akan dibuat otomatis)
 ├─ src/
-│  ├─ bin_packing.py          # Representasi & operasi state bin packing
-│  ├─ objective_function.py   # Fungsi objektif & utilitas evaluasi
-│  ├─ hill_climbing.py        # Implementasi berbagai varian hill climbing
-│  ├─ simulated_annealing.py  # Implementasi simulated annealing
-│  ├─ genetic_algorithm.py    # Implementasi genetic algorithm
-│  ├─ visualizer.py           # Plot konvergensi dan ringkasan state
-│  ├─ utils.py                # Loader data, printer state, helper lain
-│  └─ main.py                 # Entry point untuk menjalankan semua eksperimen
+│  ├─ bin_packing.py                                        # Representasi & operasi state bin packing
+│  ├─ objective_function.py                                 # Fungsi objektif & utilitas evaluasi
+│  ├─ hill_climbing.py                                      # Implementasi berbagai varian hill climbing
+│  ├─ simulated_annealing.py                                # Implementasi simulated annealing
+│  ├─ genetic_algorithm.py                                  # Implementasi genetic algorithm
+│  ├─ visualizer.py                                         # Plot konvergensi dan ringkasan state
+│  ├─ utils.py                                              # Loader data, printer state, helper lain
+│  └─ main.py                                               # Entry point untuk menjalankan semua eksperimen
 └─ README.md (dokumen ini)
 ```
 
