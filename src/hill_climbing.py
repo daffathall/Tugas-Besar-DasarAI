@@ -4,11 +4,7 @@ from typing import List, Dict, Tuple
 from bin_packing import BinPacking
 from objective_function import calculate_objective
 
-def steepest_ascent_hill_climbing(
-    bp: BinPacking,
-    initial_state: List[List[str]],
-    max_iterations: int = 1000
-) -> Tuple[List[List[str]], float, List[float], int]:
+def steepest_ascent_hill_climbing(bp: BinPacking, initial_state: List[List[str]], max_iterations: int = 1000) -> Tuple[List[List[str]], float, List[float], int]:
     """
     Steepest Ascent Hill Climbing
     Selalu pilih tetangga TERBAIK
@@ -54,11 +50,7 @@ def steepest_ascent_hill_climbing(
     return current_state, current_score, history, iteration
 
 
-def stochastic_hill_climbing(
-    bp: BinPacking,
-    initial_state: List[List[str]],
-    max_iterations: int = 1000
-) -> Tuple[List[List[str]], float, List[float], int]:
+def stochastic_hill_climbing(bp: BinPacking, initial_state: List[List[str]], max_iterations: int = 1000) -> Tuple[List[List[str]], float, List[float], int]:
     """
     Stochastic Hill Climbing
     Pilih tetangga yang lebih baik secara RANDOM
@@ -101,12 +93,7 @@ def stochastic_hill_climbing(
     return current_state, current_score, history, iteration
 
 
-def sideways_move_hill_climbing(
-    bp: BinPacking,
-    initial_state: List[List[str]],
-    max_iterations: int = 1000,
-    max_sideways: int = 100
-) -> Tuple[List[List[str]], float, List[float], int]:
+def sideways_move_hill_climbing(bp: BinPacking, initial_state: List[List[str]], max_iterations: int = 1000, max_sideways: int = 100) -> Tuple[List[List[str]], float, List[float], int]:
     """
     Hill Climbing with Sideways Move
     Izinin perpindahan ke tetangga dengan skor SAMA (maksimal max_sideways kali)
@@ -163,11 +150,7 @@ def sideways_move_hill_climbing(
     return current_state, current_score, history, iteration
 
 
-def random_restart_hill_climbing(
-    bp: BinPacking,
-    max_restarts: int = 10,
-    max_iterations_per_restart: int = 100
-) -> Tuple[List[List[str]], float, List[float], int, List[int]]:
+def random_restart_hill_climbing(bp: BinPacking, max_restarts: int = 10, max_iterations_per_restart: int = 100) -> Tuple[List[List[str]], float, List[float], int, List[int]]:
     """
     Random Restart Hill Climbing
     Jalanin steepest ascent berkali-kali dengan initial state berbeda
@@ -186,9 +169,7 @@ def random_restart_hill_climbing(
         initial_state = bp.initial_state_random()
         
         # jalanin steepest ascent
-        state, score, history, iterations = steepest_ascent_hill_climbing(
-            bp, initial_state, max_iterations_per_restart
-        )
+        state, score, history, iterations = steepest_ascent_hill_climbing(bp, initial_state, max_iterations_per_restart)
         
         iterations_per_restart.append(iterations)
         total_iterations += iterations
