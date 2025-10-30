@@ -61,6 +61,9 @@ pip install matplotlib numpy
 ## Menjalankan Program
 Dari direktori root repo:
 ```bash
-
+# Windows
 python src/main.py
+
+# macOS/Linux
+python3 src/main.py
 ```
