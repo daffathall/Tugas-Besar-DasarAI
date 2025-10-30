@@ -6,7 +6,6 @@ class BinPacking:
     def __init__(self, kapasitas: int, barang: Dict[str, int]):
         """
         Inisialisasi Bin Packing Problem
-        
         Args:
             kapasitas: Kapasitas setiap kontainer/bin
             barang: Dictionary item_id -> ukuran
@@ -22,7 +21,7 @@ class BinPacking:
         random.shuffle(items)
         
         for item in items:
-            # Coba masukkan ke bin yang sudah ada
+            # masukin ke bin yang sudah ada
             placed = False
             for bin_items in state:
                 if self._can_fit(bin_items, item):
@@ -30,7 +29,7 @@ class BinPacking:
                     placed = True
                     break
             
-            # Buat bin baru jika tidak muat
+            # buat bin baru kalo gamuat
             if not placed:
                 state.append([item])
         
@@ -42,15 +41,15 @@ class BinPacking:
         
         for item in self.item_ids:
             placed = False
-            
-            # Coba masukkan ke bin yang sudah ada (bin pertama yang muat)
+
+            # masukin ke bin yang sudah ada
             for bin_items in state:
                 if self._can_fit(bin_items, item):
                     bin_items.append(item)
                     placed = True
                     break
             
-            # Buat bin baru jika tidak ada space
+            # buat bin baru kalo tidak ada space
             if not placed:
                 state.append([item])
         
@@ -64,7 +63,7 @@ class BinPacking:
             best_bin = None
             best_remaining = float('inf')
             
-            # Cari bin dengan sisa space minimum setelah item dimasukkan
+            # cari bin dengan sisa space minimum setelah item dimasukin
             for bin_items in state:
                 if self._can_fit(bin_items, item):
                     current_size = sum(self.barang[i] for i in bin_items)
@@ -88,10 +87,10 @@ class BinPacking:
         """
         state = []
         items = self.item_ids.copy()
-        random.shuffle(items)  # Shuffle untuk randomness
+        random.shuffle(items)  # shuffle untuk randomness
         
         for item in items:
-            state.append([item])  # Setiap item di bin sendiri
+            state.append([item])  # setiap item di bin sendiri
         
         return state
     
@@ -101,7 +100,7 @@ class BinPacking:
         Assign item ke bin secara random dengan probabilitas tinggi membuat bin baru
         Untuk dataset kecil, gunakan worst() untuk visualisasi yang lebih baik
         """
-        # Jika dataset kecil (< 15 items), gunakan worst initial state
+        # kalo dataset kecil (< 15 items), gunakan worst initial state
         if len(self.item_ids) < 15:
             return self.initial_state_worst()
         
@@ -114,7 +113,7 @@ class BinPacking:
             if random.random() < 0.7 or len(state) == 0:
                 state.append([item])
             else:
-                # Coba masukkan ke bin random yang sudah ada
+                # coba masukin ke bin random yang sudah ada
                 random_bin = random.choice(state)
                 if self._can_fit(random_bin, item):
                     random_bin.append(item)
@@ -134,12 +133,12 @@ class BinPacking:
     
     def is_valid(self, state: List[List[str]]) -> bool:
         """Cek apakah state valid (tidak overflow, semua item ada)"""
-        # Cek overflow
+        # cek overflow
         for bin_items in state:
             if self.get_bin_size(bin_items) > self.kapasitas:
                 return False
         
-        # Cek semua item ada
+        # cek semua item ada
         all_items = set()
         for bin_items in state:
             all_items.update(bin_items)
@@ -157,7 +156,7 @@ class BinPacking:
         # 1. Operasi Move (pindah)
         for i, bin_i in enumerate(state):
             for item in bin_i:
-                # Coba pindahkan ke bin yang sudah ada
+                # coba pindahkan ke bin yang sudah ada
                 for j, bin_j in enumerate(state):
                     if i != j:
                         new_state = copy.deepcopy(state)
@@ -170,7 +169,7 @@ class BinPacking:
                         if self.is_valid(new_state):
                             neighbors.append(new_state)
                 
-                # Coba pindahkan ke bin baru
+                # coba pindahkan ke bin baru
                 new_state = copy.deepcopy(state)
                 new_state[i].remove(item)
                 new_state.append([item])
@@ -187,7 +186,7 @@ class BinPacking:
                         for item_j in bin_j:
                             new_state = copy.deepcopy(state)
                             
-                            # Tukar item
+                            # tukar item
                             new_state[i].remove(item_i)
                             new_state[i].append(item_j)
                             new_state[j].remove(item_j)
@@ -207,23 +206,23 @@ class BinPacking:
         for _ in range(max_attempts):
             new_state = copy.deepcopy(state)
             
-            # Pilih secara random: move atau swap
+            # pilih secara random: move atau swap
             if random.random() < 0.7:  # 70% move, 30% swap
-                # Operasi Move
+                # operasi Move
                 if len(new_state) > 0:
                     bin_idx = random.randint(0, len(new_state) - 1)
                     if len(new_state[bin_idx]) > 0:
                         item = random.choice(new_state[bin_idx])
                         new_state[bin_idx].remove(item)
                         
-                        # Pilih tujuan: bin yang ada atau bin baru
+                        # pilih tujuan: bin yang ada atau bin baru
                         if random.random() < 0.8 and len(new_state) > 1:
                             dest_idx = random.randint(0, len(new_state) - 1)
                             new_state[dest_idx].append(item)
                         else:
                             new_state.append([item])
             else:
-                # Operasi Swap
+                # operasi Swap
                 if len(new_state) >= 2:
                     bin1_idx = random.randint(0, len(new_state) - 1)
                     bin2_idx = random.randint(0, len(new_state) - 1)
@@ -237,11 +236,11 @@ class BinPacking:
                         new_state[bin2_idx].remove(item2)
                         new_state[bin2_idx].append(item1)
             
-            # Hapus bin kosong
+            # hapus bin kosong
             new_state = [b for b in new_state if len(b) > 0]
             
             if self.is_valid(new_state):
                 return new_state
         
-        # Jika tidak ada tetangga valid, return state asli
+        # kalo tidak ada tetangga valid, return state asli
         return copy.deepcopy(state)
